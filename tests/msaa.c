@@ -45,6 +45,9 @@
 
 #include "getopt.h"
 
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "stb_image_write.h"
+
 static const vec2 vertices[4] =
 {
     { -0.6f, -0.6f },
@@ -175,6 +178,8 @@ int main(int argc, char** argv)
     glVertexAttribPointer(vpos_location, 2, GL_FLOAT, GL_FALSE,
                           sizeof(vertices[0]), (void*) 0);
 
+    uint8_t * img_buffer = NULL;
+
     while (!glfwWindowShouldClose(window))
     {
         float ratio;
@@ -207,6 +212,20 @@ int main(int argc, char** argv)
         glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*) mvp);
         glEnable(GL_MULTISAMPLE);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+
+        if (img_buffer == NULL) {
+            img_buffer = (uint8_t *)malloc(width * height * 4);
+        }
+        glReadPixels(
+            0, 0, width, height,
+            GL_RGBA, GL_UNSIGNED_BYTE, img_buffer
+        );
+        printf("dump\n");
+
+        stbi_write_png(
+            "test_dump.png", width, height, 4,
+            img_buffer, width * 4
+        );
 
         glfwSwapBuffers(window);
         glfwPollEvents();

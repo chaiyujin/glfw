@@ -1,3 +1,6 @@
+# EGL Headless extension
+Workaround until https://github.com/glfw/glfw/pull/1608 is merged.
+
 # GLFW
 
 [![Build status](https://travis-ci.org/glfw/glfw.svg?branch=master)](https://travis-ci.org/glfw/glfw)

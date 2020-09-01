@@ -1028,6 +1028,10 @@ extern "C" {
  *  [window hint](@ref GLFW_X11_CLASS_NAME_hint).
  */
 #define GLFW_X11_INSTANCE_NAME      0x00024002
+/*! @brief EGL Headless specific
+ *  [window hint](@ref GLFW_EGL_HEADLESS_DEVICE_INDEX_hint).
+ */
+#define GLFW_EGL_HEADLESS_DEVICE_INDEX 0x00024003
 /*! @} */
 
 #define GLFW_NO_API                          0
